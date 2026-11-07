@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1000 700">
+  <!-- Generator: Adobe Illustrator 29.8.4, SVG Export Plug-In . SVG Version: 2.1.1 Build 6)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #f5f1ec;
+        font-family: Helvetica-Bold, Helvetica;
+        font-size: 28px;
+        font-weight: 700;
+        isolation: isolate;
+        letter-spacing: .28em;
+      }
+
+      .st1, .st2 {
+        fill: #e13b4e;
+      }
+
+      .st3 {
+        fill: url(#linear-gradient);
+        stroke-linejoin: round;
+      }
+
+      .st3, .st4, .st5 {
+        stroke: #ffc627;
+      }
+
+      .st3, .st4, .st6 {
+        stroke-width: 12px;
+      }
+
+      .st7 {
+        fill: #3950a2;
+      }
+
+      .st4 {
+        fill: #100e11;
+      }
+
+      .st8 {
+        fill: #fff;
+      }
+
+      .st5 {
+        fill: #241d23;
+        stroke-width: 8px;
+      }
+
+      .st6 {
+        stroke-linecap: round;
+      }
+
+      .st6, .st2 {
+        stroke: #f5f1ec;
+      }
+
+      .st9 {
+        fill: #ffc627;
+      }
+
+      .st10 {
+        fill: #171419;
+      }
+
+      .st2 {
+        stroke-width: 6px;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="193.6" y1="746.88" x2="194.6" y2="745.88" gradientTransform="translate(-100441 358605) scale(520 -480)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e13b4e"/>
+      <stop offset="1" stop-color="#641b30"/>
+    </linearGradient>
+  </defs>
+  <rect class="st10" width="1000" height="700"/>
+  <path class="st3" d="M310,90h390l65,480H245l65-480Z"/>
+  <path class="st4" d="M350,145h310l35,250h-380l35-250Z"/>
+  <path class="st5" d="M310,420h390l20,110h-430l20-110Z"/>
+  <path class="st6" d="M383.35,473.99v-35"/>
+  <circle class="st2" cx="383.35" cy="428.99" r="25"/>
+  <circle class="st9" cx="586.73" cy="450.49" r="11.5"/>
+  <circle class="st1" cx="586.73" cy="497.53" r="11.85"/>
+  <circle class="st8" cx="610.42" cy="475" r="11.85"/>
+  <circle class="st7" cx="563.03" cy="473.83" r="11.85"/>
+  <text class="st0" transform="translate(365.77 60)"><tspan x="0" y="0">INSERT COIN</tspan></text>
+</svg>

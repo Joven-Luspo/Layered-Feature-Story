@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L6 · Composition Plan</title>
+<style>
+    body{
+        font-family:system-ui,sans-serif;
+        line-height:1.55;max-width:96rem;
+        margin:auto;
+        padding:1rem;
+        color:#211c21;
+    }
+
+    h1{
+        line-height:1.15;
+    } 
+    
+    table{
+        width:100%;
+        border-collapse:collapse;
+    } 
+    
+    th,td{
+        padding:.7rem;
+        border:1px solid #888;
+        text-align:left;
+        vertical-align:top;
+    } 
+    
+    th{
+        background:#eee;
+    } 
+    
+    caption{
+        text-align:left;
+        padding:.5rem 0;
+        font-weight:700;
+    }
+
+    @media(max-width:48rem){
+        table,tbody,tr,td{display:block}thead{position:absolute;
+        width:1px;
+        height:1px;
+        overflow:hidden;
+        clip:rect(0,0,0,0)}tr{margin-block:1rem;
+        border:1px solid #888}td::before{content:attr(data-label);
+        display:block;
+        font-weight:700}
+    }
+</style>
+</head>
+<body>
+    <h1>L6 · Composition Plan</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Element</th>
+                <th>Content purpose</th>
+                <th>Normal-flow baseline</th>
+                <th>Chosen technique and why</th>
+                <th>Containing block / stacking context</th>
+                <th>Fallback or disengagement</th>
+                <th>Required test</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Element">Header issue badge (L3)</td>
+                <td>Small editorial label that identifies the feature.</td>
+                <td>Inline text after the byline in the header.</td>
+                <td>Absolute positioning anchors the badge in the top-right corner of the header without moving the title or lede.</td>
+                <td><code>.feature-header</code> is position:relative and the named containing block. Badge uses layer token <code>--layer-badge:3</code>.</td>
+                <td>At 52rem and below it returns to static flow below the byline.</td>
+                <td>Long title, 320px width, 200% zoom; confirm no overlap with title or focus.</td>
+            </tr>
+            <tr>
+                <td data-label="Element">Story guide (L3)</td>
+                <td>Navigation links to five story sections.</td>
+                <td>Navigation appears before article in document order.</td>
+                <td>Sticky positioning keeps navigation visible while reading on wide screens; Grid handles the page columns.</td>
+                <td>Sticky element is bounded by the <code>.page-layout</code> grid item/container; nearest scrolling ancestor is the page. Uses <code>--layer-sticky:2</code>.</td>
+                <td>At 52rem and below, position becomes static and the layout becomes one column.</td>
+                <td>Scroll from page top through article end; verify it stops at its containing block. Test each anchor by pointer and keyboard.</td>
+            </tr>
+            <tr>
+                <td data-label="Element">Pull quote (L3–L4)</td>
+                <td>Emphasizes the shift from arcade rounds to persistent home-game worlds.</td>
+                <td>Blockquote sits between paragraphs in normal source order.</td>
+                <td>Relative positioning is not needed; a negative block-start margin creates a controlled overlap with the preceding figure. Local z-index keeps it above the figure.</td>
+                <td>Nearest positioned ancestor is the story section; <code>--layer-raised:1</code>. No global overlay context.</td>
+                <td>At narrow widths the negative inline margin is removed; block margin is restored.</td>
+                <td>Double preceding paragraph and quote text; inspect overlap, keyboard focus, and pointer access.</td>
+            </tr>
+            <tr>
+                <td data-label="Element">Feature image frame (L5)</td>
+                <td>Decorative illustration introduces the arcade section.</td>
+                <td>Figure and image remain full-width content in normal flow.</td>
+                <td>Rounded frame and a polygon clip-path give the image a subtle editorial cut without clipping text or controls.</td>
+                <td>Figure is position:relative for a named local frame; no z-index is applied to it.</td>
+                <td>Base image remains rectangular if clip-path is unsupported or disabled. Caption remains outside clipped image.</td>
+                <td>Disable clip-path in DevTools; verify full image and caption remain readable. Test image scaling at all viewport sizes.</td>
+            </tr>
+            <tr>
+                <td data-label="Element">Controller portrait (L5)</td>
+                <td>Visual break beside the modern gaming section.</td>
+                <td>Image is a block image between paragraphs with alt text.</td>
+                <td>At wide widths it floats inline-start and uses <code>shape-outside:circle(50%)</code> with <code>shape-margin</code> to create an editorial wrap.</td>
+                <td>Float and shape affect inline flow within the <code>.modern-section</code> block formatting context, established by <code>display:flow-root</code>.</td>
+                <td>Shape rule is feature-queried. Below 48rem the image returns to a centered block; without shape support, the image returns to ordinary block flow.</td>
+                <td>Disable shape-outside; confirm text remains in DOM order and image/paragraphs remain readable. Double paragraph length.</td>
+            </tr>
+            <tr>
+                <td data-label="Element">Rounded surfaces (L5)</td>
+                <td>Visually groups guide, quote, image frame, and documentation panel.</td>
+                <td>Each block is a regular rectangular box.</td>
+                <td>Small consistent border radii provide grouping and visual hierarchy; they do not alter content geometry.</td>
+                <td>Ordinary block formatting; no new stacking context intentionally created by radius.</td>
+                <td>Square corners are a fully equivalent fallback.</td>
+                <td>200% zoom and high text zoom; confirm borders do not clip text or focus outlines.</td>
+            </tr>
+            <tr>
+                <td data-label="Element">Header decoration (L4)</td>
+                <td>Subtle visual texture behind the header copy.</td>
+                <td>Decorative circle would be absent.</td>
+                <td>Absolutely positioned pseudo-element is bounded to the header and marked pointer-events:none so it cannot intercept interaction.</td>
+                <td><code>.feature-header</code> containing block; decorative pseudo-element is not assigned z-index.</td>
+                <td>Decoration can disappear without affecting content or navigation.</td>
+                <td>Click badge and header content; verify decorative area never blocks pointer activation.</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><strong>Layer tokens:</strong> base 0, raised 1, sticky 2, badge 3. Values are deliberately small and semantic.</p>
+    <p><a href="index.html">Return to feature story</a></p>
+</body>
+</html>
